@@ -5,13 +5,20 @@ create_table(options)
 
 live = True
 turn = 0
+prev_turn = -1
 
 while live:
     screen_cleaner()
     create_table(options)
+    print("Player " + str((turn % 2) + 1) + "'s turn: Do your move or type 'q' to quit the game")
+    if prev_turn == turn:
+        print("Invalid input, please pick another move")
+    prev_turn = turn
     move = input()
-    if move == "s":
+    if move == "q":
         live = False
-
-    turn += 1
-    options[int(move)] = whose_turn(turn)
+        print("Player " + str((turn % 2) + 1) + " chose to quit the game")
+    elif str.isdigit(move) and int(move) in options:
+        if not options[int(move)] in {"X", "O"}:
+            turn += 1
+            options[int(move)] = whose_turn(turn)
