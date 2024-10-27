@@ -27,9 +27,9 @@ while live:
         create_table(options)
         print("Player " + str(turn % 2) + " won the game!")
         live = False
-    else:
-        live = True
-    if turn > 8:
+    elif turn > 8:
         live = False
         create_table(options)
-        print("It's a Tie!!")
+        print("Its a Tie!!")
+    else:
+        live = True
