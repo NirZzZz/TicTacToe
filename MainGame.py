@@ -1,4 +1,4 @@
-from Logic import create_table, screen_cleaner, whose_turn
+from Logic import create_table, screen_cleaner, whose_turn, check_win
 
 options = {1: "1", 2: "2", 3: "3", 4: "4", 5: "5", 6: "6", 7: "7", 8: "8", 9: "9"}
 create_table(options)
@@ -22,3 +22,14 @@ while live:
         if not options[int(move)] in {"X", "O"}:
             turn += 1
             options[int(move)] = whose_turn(turn)
+    win = check_win(options)
+    if win:
+        create_table(options)
+        print("Player " + str(turn % 2) + " won the game!")
+        live = False
+    else:
+        live = True
+    if turn > 8:
+        live = False
+        create_table(options)
+        print("It's a Tie!!")
